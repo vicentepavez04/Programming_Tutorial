@@ -6,7 +6,7 @@ Tutorials:
 - Actual:
   - Pytorch
 - Done:
-  -
+  - ...
 - Next:
   - SQL
   - Python
