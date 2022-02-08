@@ -1,3 +1,13 @@
-# Pytorch_Tutorial
+# Programing Tutorial
 
-Deep Learning with Pytorch
+Tutorials:
+
+
+- Actual:
+  - Pytorch
+- Done:
+  -
+- Next:
+  - SQL
+  - Python
+  - C++
