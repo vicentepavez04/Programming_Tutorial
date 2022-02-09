@@ -7,7 +7,7 @@ Tutorials:
   - Pytorch
 - Done:
   - ...
-- Next:
+- TODO:
   - SQL
   - Python
   - C++
