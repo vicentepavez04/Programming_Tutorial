@@ -4,9 +4,9 @@ Tutorials:
 
 
 - Actual:
-  - Pytorch
+  - C++
 - Done:
-  - ...
+  - Pytorch
 - TODO:
   - SQL
   - Python
