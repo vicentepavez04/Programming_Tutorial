@@ -55,4 +55,7 @@ int main()
     string bye= "GoodBye :)";
     cout << bye << endl;
 
+
+
+    return 0;
 }
