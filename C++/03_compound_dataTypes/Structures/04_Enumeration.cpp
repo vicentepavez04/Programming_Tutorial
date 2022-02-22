@@ -7,7 +7,6 @@ using namespace std;
 An enumeration is a user-defined data type that consists of integral constants. 
 An enum variable takes only one value out of many possible values.
 
-its a way to name values, its just a integer, by default increment by 1.
 
 */
 
