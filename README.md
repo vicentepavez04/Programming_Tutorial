@@ -4,10 +4,12 @@ Tutorials:
 
 
 - Actual:
-  - C++
+  - Web
 - Done:
+  - C++
   - Pytorch
 - TODO:
+  - Web 
   - SQL
   - Python
-  - C++
+  
