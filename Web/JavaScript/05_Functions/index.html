@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functions</title>
+</head>
+
+<style>
+
+    .boxes {
+        background-color: white;
+        border: 1px solid red;
+        border-radius: 10px;
+        padding: 10px;
+        text-align: center;
+        width: 50%;
+        margin: 0 auto;
+        
+        
+    }
+
+    #printMatrix{
+        font-size: large;
+        background-color: aqua;
+        border: 1px solid rgb(69, 69, 138);
+        border-radius: 50%;
+        padding: 10px;
+        margin-top: 10px;
+
+    }
+    #matrix{
+        color: gold;
+        font-style: italic;
+    }
+    .buttons{
+        width: 30px;
+        margin: 0 auto;
+    }
+
+</style>
+
+
+<body style="background-color: brown; margin: 50px; ">
+    <div style="background-color: rgb(214, 166, 166);padding: 100px; text-align: center;">
+        <h1>Basics Functions</h1>
+        <div class="boxes">
+            <h2>Matrix function</h2>
+            <p>Enter the number of rows</p>
+            <input type="text" id="rows"> 
+            <p>Enter the number of columns</p>
+            <input type="text" id="columns">
+            <br>
+            <button id="printMatrix">Print</button>
+            <p id="matrix"></p>
+
+            
+        </div>
+
+        <br>
+
+        <div class="boxes">
+            <h2>Calculator</h2>
+            <button id="7"  value="7" class="buttons">7</button>
+            <button id="8" class="buttons">8</button>
+            <button id="9" class="buttons">9</button> 
+            <button id="-" class="buttons">-</button> <br>
+            <button id="4" class="buttons">4</button>
+            <button id="5" class="buttons">5</button>
+            <button id="6" class="buttons">6</button>
+            <button id="+" class="buttons">+</button> <br>
+            <button id="1" class="buttons">1</button>
+            <button id="2" class="buttons">2</button>
+            <button id="3" class="buttons">3</button>
+            <button id="*" class="buttons">*</button><br>
+            <button id="0" style="width: 30px;">0</button>
+            <button id="=" style="width: 100px;">=</button>
+
+            <p id="result" style="border: 1px solid black; width: 130px; margin: 0 auto;">result</p>
+
+          
+            
+        </div>
+
+        
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
