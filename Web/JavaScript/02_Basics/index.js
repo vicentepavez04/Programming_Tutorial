@@ -42,6 +42,7 @@ console.log(listOfPeople.length);
 document.getElementById("people").innerHTML = "Array: { " + listOfPeople + " }"; 
 
 
+
 // Functions
 // functions have access to globals variables 
 

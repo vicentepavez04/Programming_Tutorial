@@ -1,0 +1,11 @@
+info:
+        Error Handling
+        setTimeout
+        setInterval
+        Date Object
+        clock program 
+        asynchronous 
+        console.time() 
+        promises 
+        async 
+        await 

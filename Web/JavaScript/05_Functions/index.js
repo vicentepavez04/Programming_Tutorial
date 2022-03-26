@@ -155,3 +155,49 @@ function calculator(oper){
 }
 
 
+
+
+/*
+Compact alternative for traditional functions 
+Arrow function expression =>
+*/ 
+
+const greeting = (username) => {
+    console.log(`hello ${username}`);
+
+}
+
+greeting("Vincent")
+
+const percent = (x, y) => {
+    return x/y * 100;
+}
+console.log(percent(50,200));
+
+let grades = [100,50,60,80,40,12];
+
+grades.sort((x, y) => {return y - x} );
+grades.forEach((element) =>{console.log(element)})
+
+
+
+// Nested Functions 
+let userName = "Xavier";
+let userInbox = 0;
+
+/*
+Inner functions are hidden outside the outer function
+*/
+login();
+
+function login(){
+    displayUserName();
+    displayUserInbox();
+
+    function displayUserName(){
+        console.log(`Welcome ${userName}`);
+    }
+    function displayUserInbox(){
+        console.log(`you have ${userInbox} new messages`);
+    }
+}
