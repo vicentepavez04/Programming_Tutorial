@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    #box{
+        background-color: blue;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        box-shadow: 20px 20px 20px black;
+    }
+    #box2{
+        background-color: black;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        box-shadow: 20px 20px 20px black;
+    }
+    #box3{
+        background-color: rebeccapurple;
+        width: 400px;
+        height: 100px;
+        box-shadow: 20px 20px 20px black;
+
+    }
+    #car{
+        width: 300px;
+        position: relative;
+    }
+    #dog{
+        height: 300px;
+        position: relative;
+    }
+</style>
+
+<body>
+    <div id="division">
+        <h1 id="myTitle"> DOM </h1>
+        <input type="radio" name="cars" value="bmw" checked="checked">
+        <label for="bmw">BMW</label><br>
+        <input type="radio" name="cars" value="dodge">
+        <label for="dodge">Dodge</label><br>
+        <input type="radio" name="cars" value="suzuki">
+        <label for="suzuki">Suzuki</label><br>
+    </div>
+    <ul id="numbers">
+        <li>One</li>
+    </ul>
+    <button id="myButton">$</button>
+    <p id="money" style="color: gold; text-shadow: 1px 1px 1px black;"></p><br>
+
+    <div id="box"></div><br>
+    <div id="box2"></div><br>
+
+    <div id="box3"></div><br>
+
+    
+    <img id= "car" src="car.png"><br>
+    <button id="toggleButton">toggle</button>
+    <p>move the old car with arrow keys</p><br>
+
+    <button id="startButton">Start</button><br>
+    <img id = "dog" src="dog.png">
+    
+
+    
+    <script src="index.js"></script>
+    
+</body>
+</html>
