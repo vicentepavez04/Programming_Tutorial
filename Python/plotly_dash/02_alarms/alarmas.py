@@ -17,7 +17,6 @@ def load_data_frame(folder):
         else:
             df1 = pd.read_csv(filename)
             df = df.append(df1, ignore_index=True)
-            print(len(df))
 
     for ind in df.index:
         fecha_ = str(df['Fecha y Hora'][ind]).split(" ")[0]
@@ -34,46 +33,120 @@ def load_data_frame(folder):
 
 
 df = load_data_frame(folder="./data")
-print(df)
+
 
 ###################################### initializing dash app ######################################
-app = dash.Dash()   
+app = dash.Dash(external_stylesheets=[dbc.themes.DARKLY])  
+app.title = 'Walmart' 
 
 
 
 ###################################### APP LAYOUT ######################################
 
 
-app.layout = html.Div([
-
-    html.H1("Alarms", style={'text-align': 'center'}),
-    dcc.Dropdown(id='dpdn1', multi=False, options=[{'label':x, 'value':x} for x in sorted(df['Fecha'].unique())]),
+app.layout = dbc.Container(children=[
+    dbc.Row([html.H1("Alarms", style={'text-align': 'center'})]),
     html.Br(),
-    dcc.Graph(id='fig3', figure={}),
+    dbc.Row([dcc.Dropdown(id='dpdn1', multi=False, options=[{'label':x, 'value':x} for x in sorted(df['Fecha'].unique())], style ={'color': "black",'backgroundColor': "rgba(10, 10, 10, 0.1)", 'font_color':"white"}
+            )] , style ={'color': "white"}),
+    dbc.Row([dcc.Graph(id='fig1', figure={})]),
     html.Br(),
-    dcc.Graph(id='fig1', figure={}),
+    dbc.Row([dcc.Graph(id='fig2', figure={})]),
     html.Br(),
-    dcc.Graph(id='fig2', figure={})
+    dbc.Row([dcc.Graph(id='fig3', figure={})])
 
 ])
 #, style={ 'background-color': 'white', 'color':'black'}
 
 ###################################### THE CALLBACK ######################################
+# Figure 1
 @app.callback(
     Output('fig1', 'figure'),
+    Input('dpdn1', 'value')
+)
+def update_graph(fechas):
+    df = load_data_frame(folder="./data")
+    fig = px.histogram(df, x="Sucursal", barmode='group', color = "Fecha", title = "Conteo de alertas por Sucursal")
+
+
+    # style
+    fig.update_layout({
+                'plot_bgcolor': 'rgba(0, 0, 0, 0)',
+                'paper_bgcolor': 'rgba(0, 0, 0, 0)'
+                })
+
+    fig.update_layout(
+    font_family="Times New Roman",
+    font_color="white",
+    title_font_family="Times New Roman",
+    title_font_color="white",
+    legend_title_font_color="white"
+    )
+    fig.update_xaxes(title_font_family="Times New Roman")
+
+    return fig
+
+# Figure 2
+@app.callback(
     Output('fig2', 'figure'),
+    Input('dpdn1', 'value')
+)
+def update_graph(fechas):
+    df = load_data_frame(folder="./data")
+    dff = df[df['Fecha']== fechas]
+    fig = px.histogram(dff, x="Sucursal", barmode='group', color = "Tipo de Alerta", title = "Tipo de Alerta por Sucursal")
+
+    # style
+    fig.update_layout({
+                'plot_bgcolor': 'rgba(0, 0, 0, 0)',
+                'paper_bgcolor': 'rgba(0, 0, 0, 0)'
+                })
+
+    fig.update_layout(
+    font_family="Times New Roman",
+    font_color="white",
+    title_font_family="Times New Roman",
+    title_font_color="white",
+    legend_title_font_color="white"
+    )
+    fig.update_xaxes(title_font_family="Times New Roman")
+    
+    return fig
+
+# figure 3
+@app.callback(
     Output('fig3', 'figure'),
     Input('dpdn1', 'value')
 )
 def update_graph(fechas):
-    fig3 = px.histogram(df, x="Sucursal", barmode='group', color = "Fecha", title = "Conteo de alertas por Sucursal")
+    df = load_data_frame(folder="./data")
     dff = df[df['Fecha']== fechas]
-    fig1 = px.histogram(dff, x="Sucursal", barmode='group', color = "Tipo de Alerta", title = "Tipo de Alerta por Sucursal")
-    fig2 = px.histogram(dff, x="Sucursal", barmode='group', color = "Motivo Descarte", title = "Motivo de Descarte por Sucursal")
+    fig = px.histogram(dff, x="Sucursal", barmode='group', color = "Motivo Descarte", title = "Motivo de Descarte por Sucursal")
 
+    # style
+    fig.update_layout({
+                'plot_bgcolor': 'rgba(0, 0, 0, 0)',
+                'paper_bgcolor': 'rgba(0, 0, 0, 0)'
+                })
 
-    return fig1, fig2, fig3
+    fig.update_layout(
+    font_family="Times New Roman",
+    font_color="white",
+    title_font_family="Times New Roman",
+    title_font_color="white",
+    legend_title_font_color="white"
+    )
+    fig.update_xaxes(title_font_family="Times New Roman")
 
+    return fig
+
+@app.callback(
+    Output('dpdn1', 'options'),
+    Input('dpdn1', 'value')
+)
+def update_graph(fechas):
+    df = load_data_frame(folder="./data")
+    return [{'label':x, 'value':x} for x in sorted(df['Fecha'].unique())]
 
 if __name__ == '__main__': 
     app.run_server(port=8000)
