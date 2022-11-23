@@ -47,9 +47,12 @@ app.title = 'Walmart'
 app.layout = dbc.Container(children=[
     dbc.Row([html.H1("Alarms", style={'text-align': 'center'})]),
     html.Br(),
+    #dbc.Row([html.H1("Seleccionar Mes:", style={'text-align': 'center'})]),
+    dbc.Row([dcc.Graph(id='fig1', figure={})]),
+    html.Br(),
+    dbc.Row([html.H4("Seleccionar fecha:", style={'text-align': 'left'})]),
     dbc.Row([dcc.Dropdown(id='dpdn1', multi=False, options=[{'label':x, 'value':x} for x in sorted(df['Fecha'].unique())], style ={'color': "black",'backgroundColor': "rgba(10, 10, 10, 0.1)", 'font_color':"white"}
             )] , style ={'color': "white"}),
-    dbc.Row([dcc.Graph(id='fig1', figure={})]),
     html.Br(),
     dbc.Row([dcc.Graph(id='fig2', figure={})]),
     html.Br(),
