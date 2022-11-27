@@ -64,7 +64,7 @@ df = load_data_frame(folder="./data")
 
 ###################################### initializing dash app ######################################
 app = dash.Dash(__name__,external_stylesheets=[dbc.themes.DARKLY])  
-app.title = 'Walmart' 
+app.title = 'Walmart Alarms' 
 
 
 
@@ -82,12 +82,7 @@ app.layout = html.Div(style = {
         'padding-bottom': '50px',
         'padding-left': '30px',
         },children=[
-    html.Br(),
-    ##
-    ##  Title and logos
-    ##
-    dbc.Row([
-        dbc.Col(
+    dbc.Row([dbc.Col(
             html.Img(
             src = 'assets/logo_deepview2.png',
             alt='image',
@@ -97,14 +92,11 @@ app.layout = html.Div(style = {
                 'display': 'block',
                 'margin-left': '0',
                 'margin-right': 'auto',
-                'vertical-align': 'middle'
+                'margin-top': '0'
             })
-        ,width=3) ,
-        dbc.Col( html.H1("Resumen Alarmas", 
-            style={
-                'text-align': 'center',
-                'vertical-align': 'middle',
-                })),
+        ,width=3),
+        dbc.Col()
+        ,
         dbc.Col(
             html.Img(
             src = 'assets/logo_walmart.png',
@@ -115,9 +107,19 @@ app.layout = html.Div(style = {
                 'display': 'block',
                 'margin-left': 'auto',
                 'margin-right': '0',
-                'vertical-align': 'middle'
+                'margin-top': '10px'
             }),
-        width=3)  
+        width=3) 
+        ], className='titulo'),
+    ##
+    ##  Title and logos
+    ##
+    dbc.Row([
+         html.H1("Resumen Alarmas", 
+            style={
+                'text-align': 'center',
+                'vertical-align': 'middle',
+                }) 
     ], className='titulo'),
 
 
