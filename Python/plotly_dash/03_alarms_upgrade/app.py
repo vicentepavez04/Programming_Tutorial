@@ -186,19 +186,20 @@ app.layout = html.Div(style = {
 
 ###################################### THE CALLBACK ######################################
 # Figure 1 Conteo de alertas por Sucursal
-# @app.callback(
-#     Output('fig1', 'figure'),
-#     Input('dpdn1', 'value')
-# )
-# def update_graph(fechas):
-#     df = load_data_frame(folder="./data")
-#     fig = px.histogram(df, x="Sucursal", barmode='group', color = "Fecha", title = "Conteo de alertas por Sucursal")
+@app.callback(
+    Output('fig1', 'figure'),
+    Input('my-date-picker-range', 'start_date'),
+    Input('my-date-picker-range', 'end_date'))
 
+def update_graph(start_date, end_date):
+    df = load_data_frame(folder="./data")
+    mask = (df['Fecha2'] > start_date) & (df['Fecha2'] <= end_date)
+    dff = df.loc[mask]
+    fig1 = px.histogram(dff, x="Sucursal", barmode='group', color = "Fecha", title = "Conteo de alertas por Sucursal")
+    fig1 = figure_layout_A(fig1)
 
-#     # style
-#     fig = figure_layout_A(fig)
+    return fig1
 
-#     return fig
 
 # Figure 2 Tipo de Alerta por Sucursal
 @app.callback(
@@ -258,33 +259,6 @@ def update_graph(Year):
     fig = figure_layout_A(fig)
 
     return fig
-
-
-
-
-@app.callback(
-    Output('fig1', 'figure'),
-    # Output('fig2', 'figure'),
-    # Output('fig3', 'figure'),
-    #Output('fig4', 'figure'),
-    #Output('fig5', 'figure'),
-    Input('my-date-picker-range', 'start_date'),
-    Input('my-date-picker-range', 'end_date'))
-
-def update_graph(start_date, end_date):
-    df = load_data_frame(folder="./data")
-    mask = (df['Fecha2'] > start_date) & (df['Fecha2'] <= end_date)
-    dff = df.loc[mask]
-
-
-        
-
-    fig1 = px.histogram(dff, x="Sucursal", barmode='group', color = "Fecha", title = "Conteo de alertas por Sucursal")
-    fig1 = figure_layout_A(fig1)
-
-    return fig1
-
-
 
 
 
