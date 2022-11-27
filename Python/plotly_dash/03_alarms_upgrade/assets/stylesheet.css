@@ -1,10 +1,6 @@
 
-.DatePickerRange{
-    background-color: transparent; 
-
-}
-
 .row{
+    border-radius: 15px ;
     background-color: rgba(2, 2, 10, 0.229);
     padding: 20px;
     box-shadow: 2px 2px 6px black;
@@ -19,6 +15,7 @@
 .row_noshadow{
     background-color: transparent;
     box-shadow: 0px 0px;
+    
 }
 
 
@@ -90,3 +87,51 @@ background: #242633 !important;
 }
 
 
+
+
+/* .DateRangePicker {
+    background-color: black;
+    display: block;
+  }
+
+.DateRangePickerInput {
+    background-color: black;
+    color: white;
+    display: block;
+}
+
+
+.CalendarMonth_caption {
+color: $popover-body-color;
+}
+
+.CalendarMonthGrid {
+background-color: blue !important;
+}
+
+.CalendarMonth {
+background-color: transparent !important;
+} */
+
+
+
+
+/* Calendar date start and end */
+.CalendarDay__selected, .CalendarDay__selected:active, .CalendarDay__selected:hover {
+    background: rgba(2, 2, 10) !important;
+    border: 1px double rgb(41, 56, 55) !important;
+    color: rgb(251, 251, 252) !important;
+  }
+  
+  /* Calendar in between start and end date */
+  .CalendarDay__selected_span {
+      background: rgb(2, 35, 47) !important;
+      border: 1px double rgb(93, 113, 120) !important;
+      color: rgb(251, 251, 252) !important;
+  }
+  
+  .CalendarDay__selected_span:active, .CalendarDay__selected_span:hover {
+      background: rgb(1, 28, 33) !important;
+      border: 1px double rgb(57, 81, 85) !important;
+      color: rgb(251, 251, 252) !important;
+  }

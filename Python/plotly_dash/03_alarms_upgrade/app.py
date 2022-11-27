@@ -152,7 +152,7 @@ app.layout = html.Div(style = {
             persistence=True,
             persisted_props=['start_date'],
             persistence_type='session',  # session, local, or memory. Default is 'local'
-            updatemode='singledate',  # singledate or bothdates. Determines when callback is triggered
+            updatemode='bothdates'  # singledate or bothdates. Determines when callback is triggered
             ),
             dcc.Graph(id='fig1', figure={})
             ]),
