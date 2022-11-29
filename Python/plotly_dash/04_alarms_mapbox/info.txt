@@ -1,0 +1,7 @@
+
+
+Add column count:
+
+https://www.statology.org/pandas-add-count-column/
+https://stackoverflow.com/questions/29791785/python-pandas-add-a-column-to-my-dataframe-that-counts-a-variable
+https://stackoverflow.com/questions/64067948/plotly-how-to-add-count-of-rows-to-y-axis-on-line-chart

@@ -27,6 +27,8 @@ def load_data_frame(folder):
     fecha = []
     month = []
     year = []
+    lat = []
+    lon = []
 
     for x, file in enumerate(os.listdir(folder)):
         filename = os.path.join(folder, file)
@@ -44,18 +46,46 @@ def load_data_frame(folder):
         month.append(int(month_))
         year.append(int(year_))
 
+
+
         if type(df["Motivo Descarte"][ind]) != type(""):
             if math.isnan(df["Motivo Descarte"][ind]):
                 df["Motivo Descarte"][ind] = "nan"
+
         
-        df['Sucursal'][ind] = "L"+str(df['Sucursal'][ind])        
+        df['Sucursal'][ind] = "L"+str(df['Sucursal'][ind]) 
+
+##############################################
+        # Ejemplo de longitudes
+        # Ñuñoa Latitud: -33.4583, Longitud: -70.6 33
+        if df['Sucursal'][ind] == "L3":
+            lat.append(-33.4583)
+            lon.append(-70.633)
+            
+        elif df['Sucursal'][ind] == "L95":
+            lat.append(-33.45)
+            lon.append(-70.6333)
+        else:
+            lat.append(-33.5833 )
+            lon.append(-70.55)       
     df["Fecha"] = fecha
-    df["Fecha2"] = pd.to_datetime(fecha)
+    df["date"] = pd.to_datetime(fecha)
     
     
+
+    df["lat"] = lat
+    df["lon"] = lon
+#######################################
+
     df["Month"] = month
     df["Year"] = year
+    df['sucursal_month_count'] = df.groupby(['Sucursal', 'Month'])['Sucursal'].transform('count')
+    df['sucursal_date_count'] = df.groupby(['Sucursal', 'date'])['Sucursal'].transform('count')
 
+
+    
+
+    #print(df)
     return df
 
 
@@ -172,6 +202,20 @@ app.layout = html.Div(style = {
             html.H4("Seleccionar Año:", style={'text-align': 'left'}),
             dcc.Dropdown(id='dpdn2', multi=False, value = max(sorted(df['Year'].unique())), options=[{'label':x, 'value':x} for x in sorted(df['Year'].unique())], style={'width': '50%'}),
             dbc.Row([dbc.Col(dcc.Graph(id='fig4', figure={})), dbc.Col(dcc.Graph(id='fig5', figure={}))], className="row_noshadow")
+    ]),
+    
+    html.Br(),
+
+    dbc.Row([
+            dcc.Graph(id='fig6', figure={})
+    ]),
+
+    html.Br(),
+
+    dbc.Row([
+            html.H4("Seleccionar Mes:", style={'text-align': 'left'}),
+            dcc.Dropdown(id='dpdn3', multi=False, value = max(sorted(df['Month'].unique())), options=[{'label':x, 'value':x} for x in sorted(df['Month'].unique())], style={'width': '50%'}),
+            dcc.Graph(id='fig7', figure={})
     ])
 
 
@@ -193,7 +237,7 @@ app.layout = html.Div(style = {
 
 def update_graph(start_date, end_date):
     df = load_data_frame(folder="./data")
-    mask = (df['Fecha2'] > start_date) & (df['Fecha2'] <= end_date)
+    mask = (df['date'] > start_date) & (df['date'] <= end_date)
     dff = df.loc[mask]
     fig1 = px.histogram(dff, x="Sucursal", barmode='group', color = "Fecha", title = "Conteo de alertas por Sucursal")
     fig1 = figure_layout_A(fig1)
@@ -253,12 +297,73 @@ def update_graph(Year):
 def update_graph(Year):
     df = load_data_frame(folder="./data")
     dff = df[df['Year']== Year]
-    fig = px.bar(dff, x="Month", y="Merma", color="Sucursal", title="Merma Mensual por Sucursal")
+    fig = px.bar(dff, x="date", y="Merma", color="Sucursal", title="Merma Mensual por Sucursal")
+    
     
     # style
     fig = figure_layout_A(fig)
 
     return fig
+
+# figure 6  line chats with slider
+@app.callback(
+    Output('fig6', 'figure'),
+    Input('dpdn2', 'value')
+)
+def update_graph(Year):
+    df = load_data_frame(folder="./data")
+    fig = px.line(df, x='date', y='sucursal_date_count', color="Sucursal")
+    
+    # style
+    fig = figure_layout_A(fig)
+    fig.update_xaxes(rangeslider_visible=True)
+
+    return fig
+
+
+# figure 7 Map
+@app.callback(
+    Output('fig7', 'figure'),
+    Input('dpdn3', 'value')
+)
+def update_graph(Month):
+    df = load_data_frame(folder="./data")
+    dff = df[df['Month']== Month]
+
+
+    fig = px.scatter_mapbox(dff, 
+                            lon='lon',
+                            lat='lat', 
+                            zoom=11,
+                            color="sucursal_month_count",
+                            size = "sucursal_month_count",
+                            hover_name="Sucursal",
+                            # width=1500,
+                            # height= 1000,
+                            # color_continuous_scale=px.colors.cyclical.IceFire,
+                            # color_continuous_scale= "temps",
+                            title = "Numero de Alertas mensual por Sucursal",
+                            size_max=15)
+
+    fig.update_layout(mapbox_style="carto-darkmatter")
+    #fig.update_layout(mapbox_style="open-street-map")
+
+
+    """
+    Identifier of base map style, some of which require a Mapbox API token to be set using plotly.express.set_mapbox_access_token(). 
+    Allowed values which do not require a Mapbox API token are 'open-street-map', 'white-bg', 'carto-positron', 'carto-darkmatter', 'stamen- terrain', 'stamen-toner', 'stamen-watercolor'. 
+    Allowed values which do require a Mapbox API token are 'basic', 'streets', 'outdoors', 'light', 'dark', 'satellite', 'satellite- streets'.
+
+
+    color = https://plotly.com/python/builtin-colorscales/
+    
+    """
+    
+    # style
+    fig = figure_layout_A(fig)
+
+    return fig
+
 
 
 
