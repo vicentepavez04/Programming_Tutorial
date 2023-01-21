@@ -321,7 +321,7 @@ def update_graph(Year):
     return fig
 
 
-# figure 7 Map
+# figure 7 MapBox
 @app.callback(
     Output('fig7', 'figure'),
     Input('dpdn3', 'value')
@@ -338,8 +338,8 @@ def update_graph(Month):
                             color="sucursal_month_count",
                             size = "sucursal_month_count",
                             hover_name="Sucursal",
-                            # width=1500,
-                            # height= 1000,
+                            width=1500,
+                            height= 1000,
                             # color_continuous_scale=px.colors.cyclical.IceFire,
                             # color_continuous_scale= "temps",
                             title = "Numero de Alertas mensual por Sucursal",
@@ -363,6 +363,9 @@ def update_graph(Month):
     fig = figure_layout_A(fig)
 
     return fig
+
+
+
 
 
 

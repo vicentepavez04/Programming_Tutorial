@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <title> Home page </title>
+<body>
+    <h1> Tutorial 2 </h1>
+    <h2>{{content}}</h2>
+    
+    
+    {% if content != "" %}
+        <h1>hello {{content}}</h1>
+        {%  for x in range(10) %}
+            {% if x % 2 == 0 %}
+                <p> {{x}} </p>
+            {% endif %}
+        {% endfor%}
+    {% else %}
+        <h2>please write your name after / in the URL</h2>
+    {% endif %}
+
+    
+</body>
+</html>
