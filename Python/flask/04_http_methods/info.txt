@@ -1,0 +1,7 @@
+
+HTTP Methods
+
+GET         --->    Read  
+POST        --->    Create
+PUT         --->    Update
+DELETE      --->    Delete
